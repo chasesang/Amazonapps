@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   validates(:description,{ presence: true, length: { minimum: 10 } })
 
   before_save :set_defaults, :titleize_title
-  
+
 
 
   def self.search(string)

@@ -3,6 +3,7 @@
 <p>$$<%= sprintf('%.2f', @product.price) %></p>
 <p>Category ID: <%= @product.category_id %></p>
 <p>Category Name: <%= @product.category.name %></p>
+<p><%= @product.user.first_name %></p>
 
 <%= link_to 'Edit', edit_product_path(@product) %>
 <%= link_to 'Delete', product_path(@product),
@@ -21,6 +22,7 @@
 <hr>
 <% @product.reviews.each do |review| %>
   <p>Review:<%= review.body %></p>
+  <p><%= review.user.first_name %></p>
     <p>Rating:<%= review.rating %></p>
   <%= link_to 'Delete', product_review_path(@product, review),
 method: :delete,
