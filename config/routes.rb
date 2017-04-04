@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create]
+  resources :sessions, only: [:new, :create]
 
   # get('/products/new', { to: 'products#new', as: 'new_product'})
   #
@@ -23,6 +24,11 @@ Rails.application.routes.draw do
   # patch('/products/:id', { to: 'products#update' })
   #
   # delete('/products/:id', { to: 'products#destroy' })
+
+  resources :sessions, only:[:new, :create] do
+     delete :destroy, on: :collection
+     #password does not show in the address url
+   end
 
   root 'welcome#index'
 

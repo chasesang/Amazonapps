@@ -6,7 +6,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      # session[:user_id] = @user.id -- create a session to log in and log out
+      session[:user_id] = @user.id
+      # create a session to log in and log out
       redirect_to products_path
     else
       render :new
