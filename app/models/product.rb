@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :category
-  has_many :reviews
+  has_many :reviews,dependent: :destroy
   validates :title, presence: true, uniqueness: {case_sensitive: false}
   validates(:price, { presence: true,
                             numericality: { greater_than: 0 }})
