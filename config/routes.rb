@@ -4,19 +4,23 @@ Rails.application.routes.draw do
   get('/contact' => 'contact#index')
   post('/contact_submit' => 'contact#create')
 
-  get('/products/new', { to: 'products#new', as: 'new_product'})
+  resources :products do
+    resources :reviews, only: [:create, :destroy]
+  end
 
-  post('/products', { to: 'products#create', as: 'products' })
-
-  get('/products/:id', { to: 'products#show',  as: 'product' })
-
-  get('/products', { to: 'products#index' })
-
-  get('/products/:id/edit', { to: 'products#edit', as: 'edit_product'})
-
-  patch('/products/:id', { to: 'products#update' })
-
-  delete('/products/:id', { to: 'products#destroy' })
+  # get('/products/new', { to: 'products#new', as: 'new_product'})
+  #
+  # post('/products', { to: 'products#create', as: 'products' })
+  #
+  # get('/products/:id', { to: 'products#show',  as: 'product' })
+  #
+  # get('/products', { to: 'products#index' })
+  #
+  # get('/products/:id/edit', { to: 'products#edit', as: 'edit_product'})
+  #
+  # patch('/products/:id', { to: 'products#update' })
+  #
+  # delete('/products/:id', { to: 'products#destroy' })
 
   root 'welcome#index'
 

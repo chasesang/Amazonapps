@@ -6,12 +6,40 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+['Books', 'TV shows', 'Movies', 'Clothse', 'Music', 'Food'].each do |category|
+Category.create(name: category)
+end
 
-1000.times do
-  Product.create({ title: Faker::Name.unique.name,
+100.times do
+  category = Category.all.sample
+
+  Product.create({ title: Faker::Friends.character,
                     description: Faker::Friends.quote,
-                    price: rand(1000)
+                    price: rand(100),
+                    category_id: category.id
+
+
                   })
 end
 
-puts Cowsay.say 'Created 1000 questions', :cow
+products = Product.all
+
+products.each do |product|
+  rand(0..5).times do
+    product.reviews.create({
+      body: Faker::Friends.quote,
+      rating: rand(1..5)
+      })
+  end
+end
+
+reviews_count = Review.count
+product_count = Product.count
+# 100.times do
+#   User.create first_name: Faker::Name.first_name,
+#               last_name: Faker::Name.last_name,
+#               email: Fakder::Internet.email
+#
+# end
+puts Cowsay.say "Created #{product_count}", :cow
+puts Cowsay.say "Created #{reviews_count} reviews", :cow

@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  belongs_to :category
+  has_many :reviews
   validates :title, presence: true, uniqueness: {case_sensitive: false}
   validates(:price, { presence: true,
                             numericality: { greater_than: 0 }})
@@ -7,9 +9,9 @@ class Product < ApplicationRecord
   before_save :set_defaults, :titleize_title
 
 
-  # def self.search(string)
-  #   self.where(["title ILIKE? or description ILIKE?", "%#{string}%","%#{string}%"])
-  # end
+  def self.search(string)
+    self.where(["title ILIKE? or description ILIKE?", "%#{string}%","%#{string}%"])
+  end
 
   def self.search(find)
      where('title ILIKE? OR body ILIKE ?',"%#{find}%", "%#{find}%").
@@ -24,4 +26,4 @@ class Product < ApplicationRecord
     self.title =title.titleize if title.present?
     end
 
-end
+ end

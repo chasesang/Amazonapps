@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    product_params = params.require(:product).permit([:title, :description, :price])
+    product_params = params.require(:product).permit([:title, :description, :price, :category_id])
     @product = Product.new product_params
     if @product.save
       redirect_to products_path
@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
 
   def show
     @product = Product.find params[:id]
+    @review = Review.new
   end
 
   def destroy

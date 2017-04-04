@@ -19,7 +19,16 @@
     <%= link_to 'New Product', new_product_path %>
     |
     <%= link_to 'All Products', products_path %>
-    <hr>
-    <%= yield %>
-  </body>
+<hr>
+
+
+<% if flash[:notice] %>
+        <div class="flash-notice"><%= flash[:notice] %></div>
+      <% elsif flash[:alert] %>
+        <div class="flash-alert"><%= flash[:alert] %></div>
+      <% end %>
+      <%#= notice || alert %>
+    
+  <%= yield %>
+</body>
 </html>
