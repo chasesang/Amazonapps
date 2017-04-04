@@ -1,12 +1,15 @@
 class ReviewsController < ApplicationController
+  before_action :authenticate_user!, only: [:create, :destroy]
   def create
   @product = Product.find(params[:product_id])
   # puts params
+
   review_params = params.require(:review).permit(:body, :rating)
   # puts review_params
 
       @review = Review.new(review_params)
       @review.product = @product
+      @review.user = current_user
 
 
   # @answer = @queston.answers.build(answer_params)
