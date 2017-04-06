@@ -35,7 +35,7 @@ gem 'awesome_print'
 gem 'hirb'
 
 gem 'cowsay', '~> 0.3'
-
+gem 'cancancan', '~> 1.10'
 gem 'colorize', '0.8.1'
 
 gem 'faker'

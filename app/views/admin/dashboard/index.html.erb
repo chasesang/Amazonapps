@@ -1,0 +1,18 @@
+<h1>Admin Panel</h1>
+<h2>Number of Products: <%= @product_count %></h2>
+<h2>Number of Reviews: <%= @review_count %></h2>
+<h2>Number of Users: <%= @user_count %></h2>
+
+
+<% @products.each do |product| %>
+<p><%= link_to product.title, product_path(product.id) %></p>
+<p><%= product.id %></p>
+<hr>
+<% end %>
+
+<% @users.each do |user| %>
+<p><%= user.first_name %></p>
+<p><%= user.last_name %></p>
+<p><%= user.email%></p>
+<% end %>
+ 

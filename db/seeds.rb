@@ -10,13 +10,27 @@
 Category.create(name: category)
 end
 
+
+#Create users
+20.times do
+  User.create(first_name: Faker::Name.first_name,
+                last_name: Faker::Name.last_name,
+                email: Faker::Internet.email,
+                password: '12345678',
+                password_confirmation: '12345678'
+    )
+    puts "Product created!"
+  end
+
+#create Products
 100.times do
   category = Category.all.sample
 
   Product.create({ title: Faker::Friends.character,
                     description: Faker::Friends.quote,
                     price: rand(100),
-                    category_id: category.id
+                    category_id: category.id,
+                    user_id: user.id
 
 
                   })
@@ -24,22 +38,19 @@ end
 
 products = Product.all
 
+#Create Reviews
 products.each do |product|
   rand(0..5).times do
     product.reviews.create({
       body: Faker::Friends.quote,
-      rating: rand(1..5)
+      rating: rand(1..5),
+      user_id: user.id
       })
   end
 end
 
 reviews_count = Review.count
 product_count = Product.count
-# 100.times do
-#   User.create first_name: Faker::Name.first_name,
-#               last_name: Faker::Name.last_name,
-#               email: Fakder::Internet.email
-#
-# end
+
 puts Cowsay.say "Created #{product_count}", :cow
 puts Cowsay.say "Created #{reviews_count} reviews", :cow

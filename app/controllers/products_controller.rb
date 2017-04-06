@@ -1,8 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
-
-
   def new
     @product = Product.new
   end
@@ -28,25 +26,32 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    product = Product.find params[:id]
-    product.destroy
-    redirect_to products_path
+    @product = Product.find params[:id]
+    if can? :destroy, @product
+     @product.destroy
+     redirect_to products_path, notice: 'Product delete'
+   else
+     redirect_to root_path, alert: 'Access denied'
+   end
   end
 
   def edit
     @product = Product.find params[:id]
+    redirect_to root_path, alert: 'access denited' unless can? :edit, @product
 
   end
 
   def update
+  @product = Product.find params[:id]
+  product_params = params.require(:product).permit([:title, :description, :price, :category_id])
 
-    @product= Product.find params[:id]
-      product_params = params.require(:product).permit([:title, :description, :price])
-    if @product.update(product_params)
-      redirect_to product_path(@product)
+  if !(can? :edit, @product)
+      redirect_to root_path, alert: 'acess denied'
+    elsif @product.update(product_params)
+      redirect_to product_path(@product), notice: 'Product updated'
     else
       render :edit
     end
-  end
+end
 
 end

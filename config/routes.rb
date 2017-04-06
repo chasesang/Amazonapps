@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   get('/about' => 'about#index')
   get('/contact' => 'contact#index')
   post('/contact_submit' => 'contact#create')
+  # get('/admin/panel' => 'dashboard#index')
 
+  namespace :admin do
+    resources :dashboard, only: :index
+  end
+
+  # get('/admin/dashboard' => 'admin/dashboard#index')
   resources :products do
     resources :reviews, only: [:create, :destroy]
   end
