@@ -19,12 +19,13 @@ end
                 password: '12345678',
                 password_confirmation: '12345678'
     )
-    puts "Product created!"
+    puts "User created!"
   end
 
 #create Products
 100.times do
   category = Category.all.sample
+  user = User.all.sample
 
   Product.create({ title: Faker::Friends.character,
                     description: Faker::Friends.quote,
@@ -41,6 +42,7 @@ products = Product.all
 #Create Reviews
 products.each do |product|
   rand(0..5).times do
+    user = User.all.sample
     product.reviews.create({
       body: Faker::Friends.quote,
       rating: rand(1..5),

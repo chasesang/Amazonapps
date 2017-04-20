@@ -10,6 +10,7 @@ class ProductsController < ApplicationController
     @product = Product.new product_params
     @product.user = current_user
     if @product.save
+      ProductsMailer.notify_product_owner(@product).deliver_now
       redirect_to products_path
     else
       render :new
@@ -40,6 +41,8 @@ class ProductsController < ApplicationController
     redirect_to root_path, alert: 'access denited' unless can? :edit, @product
 
   end
+
+
 
   def update
   @product = Product.find params[:id]

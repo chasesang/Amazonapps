@@ -12,6 +12,10 @@ class Ability
     can [:edit, :destroy], Product do |product|
       product.user == user
     end
+
+    can [:update, :destroy], Review do |review|
+      review.user == user
+    end
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

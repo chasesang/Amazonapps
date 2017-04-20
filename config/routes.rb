@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   # get('/admin/dashboard' => 'admin/dashboard#index')
   resources :products do
-    resources :reviews, only: [:create, :destroy]
+    resources :reviews, only: [:create, :destroy, :update]
   end
 
   resources :users, only: [:new, :create]

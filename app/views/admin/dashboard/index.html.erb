@@ -10,9 +10,17 @@
 <hr>
 <% end %>
 
-<% @users.each do |user| %>
-<p><%= user.first_name %></p>
-<p><%= user.last_name %></p>
-<p><%= user.email%></p>
-<% end %>
- 
+<div class="row">
+   <h3>User Database</h3>
+   <% @users.each do |user| %>
+   <div class="col-md-4">
+     <span><strong> First name: </strong>
+       <%= user.first_name %></span><br />
+     <span><strong> Last name: </strong>
+       <%= user.last_name %></span><br />
+     <span><strong> Email: </strong>
+       <%= user.email%></span><br />
+       <hr />
+   </div>
+   <% end %>
+ </div>

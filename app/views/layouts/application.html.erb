@@ -21,7 +21,7 @@
     <%= link_to 'All Products', products_path %>
     |
     <% if user_signed_in? %>
-    
+
     <span>Hello <%= current_user.first_name %>,</span>
     <%= link_to 'Logout', sessions_path, method: :delete, data: { confirm: 'Logout??'} %>
     <% else %>
@@ -29,9 +29,6 @@
     |
     <%= link_to 'Login', new_session_path %>
     <% end %>
-
-
-
 
 <hr>
 
@@ -41,7 +38,8 @@
       <% elsif flash[:alert] %>
         <div class="alert alert-danger"><%= flash[:alert] %></div>
       <% end %>
-
-  <%= yield %>
+<div class="container-fluid">
+    <%= yield %>
+</div>
 </body>
 </html>

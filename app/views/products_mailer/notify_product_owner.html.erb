@@ -1,0 +1,15 @@
+<h1 style="color:red;">Hello <%= @user.first_name %>,</h1>
+
+<p>You have created a product</p>
+
+<p>Product title: <%= @product.title %></p>
+
+<p>The description: <%= @product.description %></p>
+
+<p>The price: <%= @product.price %></p>
+
+<p><%= link_to 'Product', product_url(@product) %></p>
+
+<p>Regards,</p>
+
+<p>Amazon Team</p>

@@ -1,3 +1,18 @@
+# this file is used by the bundler gem to know which gems are needed for this
+# project (the Rails project). you can install or update the gems by running
+# `bundle install` or simply `bundle` in your terminal in the root of the
+# project. you dont need to use `require 'rais'` or use ` require` for any
+# other gem defined in this Gemfile because bundler is going to automatically
+# require all the gems defined in this file ( the Gemfile)
+
+# Once you run `bundle` or `bundle install`, bundler will automtically update
+# the  `Gemfile.lock` file. The `Gemfile.lock` will `lock` the gem to a specific
+# version. This is important so all developers working on the project end up
+# using the same exact Ruby version for this project. You should never modify
+# `Gemfile.lock` directly (unless there is Git conflict in it).
+
+# if you have the Gem installed in your Ruby it will just be used, otherwise
+#bundler will install for u.
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
@@ -5,6 +20,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.2'
@@ -14,7 +30,6 @@ gem 'pg', '~> 0.18'
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
-gem 'bootstrap-sass', '~> 3.3.6'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -30,26 +45,35 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'interactive_editor'
-gem 'awesome_print'
-gem 'hirb'
 
-gem 'cowsay', '~> 0.3'
-gem 'cancancan', '~> 1.10'
-gem 'colorize', '0.8.1'
-
-gem 'faker'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'cowsay', '~> 0.3'
+
+gem 'colorize', '0.8.1'
+
+gem 'faker'
+
+gem 'cancancan', '~> 1.10'
+
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'delayed_job_active_record'
+gem 'sinatra', '2.0.0.rc2'
+gem 'delayed_job_web'
+
 group :development, :test do
-   gem 'rspec-rails'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+  gem "letter_opener"
+  gem 'interactive_editor'
+  gem 'awesome_print'
+  gem 'rails-erd'
+  gem 'hirb'
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '~> 3.0.5'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring

@@ -14,20 +14,37 @@
 <% end %>
 
 
+
 <h2>Reviews</h2>
 <%= @review.errors.full_messages.join(', ') %>
 <%= form_for [@product, @review] do |f| %>
   <%= f.text_area :body %>
-
   <%= f.select :rating, [1,2,3,4,5] %>
   <%= f.submit %>
 <% end %>
 <hr>
 <% @product.reviews.each do |review| %>
+
+<% if review.is_hidden == false %>
   <p>Review:<%= review.body %></p>
   <p><%= review.user.first_name %></p>
-    <p>Rating:<%= review.rating %></p>
-  <%= link_to 'Delete', product_review_path(@product, review),
+  <p>Rating:<%= review.rating %></p>
+    <% if can? :update, review %>
+      <%= link_to 'Hide', product_review_path(@product, review), method: :PATCH %>
+      <%= link_to 'Delete', product_review_path(@product, review),
+    method: :delete,
+    data: { confirm: 'Are you sure?'} %>
+  <% end %>
+
+<% else %>
+<p>Review:<%= review.body %></p>
+<p><%= review.user.first_name %></p>
+  <p>Rating:<%= review.rating %></p>
+<%= link_to 'Show', product_review_path(@product, review), method: :PATCH %>
+<%= link_to 'Delete', product_review_path(@product, review),
 method: :delete,
 data: { confirm: 'Are you sure?'} %>
+
+
+<% end %>
 <% end %>

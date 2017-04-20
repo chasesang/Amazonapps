@@ -1,0 +1,13 @@
+<h1 style="color:red;">Hello <%= @user.first_name %>,</h1>
+
+<p>There is a review created for your product</p>
+
+<p>Review: <%= @review.body %></p>
+
+<p>The author: <%= @review.user.first_name %></p>
+
+<p><%= link_to 'Review', product_url(@product) %></p>
+
+<p>Regards,</p>
+
+<p>Amazon Team</p>
