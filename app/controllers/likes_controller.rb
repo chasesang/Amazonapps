@@ -1,14 +1,14 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
 
-  # def index
-  #   user = User.find(params[:user_id])
-  #   @reviews = user.liked_reviews
-  #   @reviews.each do |review|
-  #     @product = review.product
-  #   end
-  #   render 'products/index'
-  # end
+  def index
+    user = User.find(params[:user_id])
+    @reviews = user.liked_reviews
+    @reviews.each do |review|
+      @product = review.product
+    end
+    render 'reviews/index'
+  end
 
   def create
 

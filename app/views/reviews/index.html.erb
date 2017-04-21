@@ -1,0 +1,7 @@
+<h1>Liked Reivews</h1>
+
+<% @reviews.each do |review| %>
+<h4>Review: <%= review.body %></h4>
+<h4>Product Title: <%= review.product.title %></h4>
+
+<% end %>
