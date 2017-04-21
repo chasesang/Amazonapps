@@ -2,7 +2,14 @@
 
 <% @products.each do |product| %>
 <h3><%= link_to product.title, product_path(product) %></h3>
-
+<% if user_signed_in? && can?(:favourite, product) %>
+  <% if product.favourited_by?(current_user) %>
+  <%= link_to fa_icon("heart"), product_favourite_path(product, product.favourite_for(current_user), origin: 'index'), method: :delete %>
+  <% else %>
+  <%= link_to fa_icon("heart-o"), product_favourites_path(product, origin: 'index'), method: :post %>
+  <% end %>
+<% end %>
+<span><%= pluralize(product.favourites.count, 'favourite') %></span>
 <p><%= product.user.first_name %></p>
 <hr>
 <% end %>

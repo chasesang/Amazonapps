@@ -18,11 +18,11 @@ class ProductsController < ApplicationController
   end
 
   def index
-    @products = Product.last(20)
+    @products = Product.all
   end
 
   def show
-    
+
     @product = Product.find params[:id]
     @review = Review.new
 

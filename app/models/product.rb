@@ -2,6 +2,9 @@ class Product < ApplicationRecord
   belongs_to :category
   belongs_to :user
   has_many :reviews, dependent: :destroy
+  has_many :favourites, dependent: :destroy
+  has_many :favouritors,  through: :favourites, source: :user
+
   validates :title, presence: true, uniqueness: {case_sensitive: false}
   validates(:price, { presence: true,
                             numericality: { greater_than: 0 }})
@@ -9,6 +12,13 @@ class Product < ApplicationRecord
 
   before_save :set_defaults, :titleize_title
 
+  def favourited_by?(user)
+    favourites.exists?(user: user)
+  end
+
+  def favourite_for(user)
+    favourites.find_by(user: user)
+  end
 
 
   def self.search(string)

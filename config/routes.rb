@@ -12,12 +12,15 @@ Rails.application.routes.draw do
   # get('/admin/dashboard' => 'admin/dashboard#index')
   resources :products do
     resources :reviews, only: [:create, :destroy, :update]
+    resources :favourites, only: [:create, :destroy]
   end
 
   resources :users, only: [:new, :create] do
     resources :likes, only: [:index]
+    resources :favourites, only: [:index]
   end
   resources :sessions, only: [:new, :create]
+  
   resources :reviews do
     resources :likes, only: [:create, :destroy]
   end
