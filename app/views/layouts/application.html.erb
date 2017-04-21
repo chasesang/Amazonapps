@@ -24,6 +24,7 @@
 
     <span>Hello <%= current_user.first_name %>,</span>
     <%= link_to 'Logout', sessions_path, method: :delete, data: { confirm: 'Logout??'} %>
+    <%= link_to 'Liked Questions', user_likes_path(current_user) %>
     <% else %>
     <%= link_to 'Sign Up', new_user_path %>
     |

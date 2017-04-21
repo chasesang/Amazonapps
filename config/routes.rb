@@ -14,8 +14,13 @@ Rails.application.routes.draw do
     resources :reviews, only: [:create, :destroy, :update]
   end
 
-  resources :users, only: [:new, :create]
+  resources :users, only: [:new, :create] do
+    resources :likes, only: [:index]
+  end
   resources :sessions, only: [:new, :create]
+  resources :reviews do
+    resources :likes, only: [:create, :destroy]
+  end
 
   # get('/products/new', { to: 'products#new', as: 'new_product'})
   #

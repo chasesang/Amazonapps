@@ -10,6 +10,7 @@ class ReviewsController < ApplicationController
       @review = Review.new(review_params)
       @review.product = @product
       @review.user = current_user
+    
 
 
   # @answer = @queston.answers.build(answer_params)

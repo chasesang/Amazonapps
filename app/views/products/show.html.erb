@@ -29,9 +29,17 @@
   <p>Review:<%= review.body %></p>
   <p><%= review.user.first_name %></p>
   <p>Rating:<%= review.rating %></p>
+
+  <% if user_signed_in? && can?(:like, review) %>
+  <% if review.liked_by?(current_user) %>
+  <%= link_to "Remove Like", review_like_path(review, review.like_for(current_user)), class: 'btn btn-primary', method: :delete %>
+  <% else %>
+  <%= link_to "Like", review_likes_path(review),  class: 'btn btn-primary', method: :post %>
+  <% end %>
+  <% end %>
     <% if can? :update, review %>
-      <%= link_to 'Hide', product_review_path(@product, review), method: :PATCH %>
-      <%= link_to 'Delete', product_review_path(@product, review),
+      <%= link_to 'Hide', product_review_path(@product, review), class: 'btn btn-primary', method: :PATCH %>
+      <%= link_to 'Delete', product_review_path(@product, review), class: 'btn btn-primary',
     method: :delete,
     data: { confirm: 'Are you sure?'} %>
   <% end %>
@@ -40,8 +48,8 @@
 <p>Review:<%= review.body %></p>
 <p><%= review.user.first_name %></p>
   <p>Rating:<%= review.rating %></p>
-<%= link_to 'Show', product_review_path(@product, review), method: :PATCH %>
-<%= link_to 'Delete', product_review_path(@product, review),
+<%= link_to 'Show', product_review_path(@product, review), class: 'btn btn-primary', method: :PATCH %>
+<%= link_to 'Delete', product_review_path(@product, review), class: 'btn btn-primary',
 method: :delete,
 data: { confirm: 'Are you sure?'} %>
 

@@ -9,6 +9,14 @@ class Ability
       can :manage, :all
     end
 
+    can :like, Review do |r|
+      user != r.user
+    end
+
+    cannot :like, Review do |r|
+      user == r.user
+    end
+
     can [:edit, :destroy], Product do |product|
       product.user == user
     end
