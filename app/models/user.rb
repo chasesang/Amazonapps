@@ -20,6 +20,7 @@ class User < ApplicationRecord
                         format: VALID_EMAIL_REGEX
 
   before_validation :downcase_email
+  before_create :generate_api_token
 
     def self.search(search_term)
       where(['first_name ILIKE ? OR last_name ILIKE ? OR email ILIKE ?', "%#{search_term}%", "%#{search_term}%", "%#{search_term}%"])
@@ -39,4 +40,10 @@ class User < ApplicationRecord
     def full_name
       "#{first_name} #{last_name}".titleize
     end
+    def generate_api_token
+    loop do
+    self.api_token = SecureRandom.urlsafe_base64(32)
+    break unless User.exists?(api_token: self.api_token)
+  end
+  end
 end

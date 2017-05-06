@@ -8,6 +8,11 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :dashboard, only: :index
   end
+  namespace :api, defaults: { format: :json} do
+    namespace :v1 do
+      resources :products
+    end
+  end
 
   # get('/admin/dashboard' => 'admin/dashboard#index')
   resources :products do
@@ -20,7 +25,7 @@ Rails.application.routes.draw do
     resources :favourites, only: [:index]
   end
   resources :sessions, only: [:new, :create]
-  
+
   resources :reviews do
     resources :likes, only: [:create, :destroy]
   end
