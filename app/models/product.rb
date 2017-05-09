@@ -4,6 +4,8 @@ class Product < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :favourites, dependent: :destroy
   has_many :favouritors,  through: :favourites, source: :user
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history, :finders]
 
   validates :title, presence: true, uniqueness: {case_sensitive: false}
   validates(:price, { presence: true,
